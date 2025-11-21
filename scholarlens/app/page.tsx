@@ -1,3 +1,5 @@
+import { Redirect } from "@/components/redirect";
+
 export default function Home() {
-  return <main className="min-h-screen flex flex-col items-center"></main>;
+  return <Redirect href="/protected/home"></Redirect>;
 }

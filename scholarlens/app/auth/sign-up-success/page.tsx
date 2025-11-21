@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -23,6 +24,13 @@ export default function Page() {
                 You&apos;ve successfully signed up. Please check your email to
                 confirm your account before signing in.
               </p>
+              <Link
+                href="https://www.gmail.com"
+                passHref={true}
+                target="_blank"
+              >
+                Open your mail
+              </Link>
             </CardContent>
           </Card>
         </div>
