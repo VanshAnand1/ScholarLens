@@ -1,53 +1,35 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# ScholarLens: AI-Powered Adaptive Scholarship Matching
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+An intelligent scholarship matching system that uses Claude AI to analyze scholarship priorities, adaptively score student matches, and generate tailored application essays.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## 🎯 Project Overview
 
-## Features
+ScholarLens transforms the scholarship application process by:
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Proxy
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+- **Analyzing** scholarship descriptions to identify hidden priorities and values
+- **Matching** students to scholarships with adaptive, explainable scoring
+- **Generating** tailored essay drafts that emphasize the right aspects of each student's profile
 
-## Demo
+Built for the Agentiiv Hackathon Challenge.
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+## 🚀 Features
 
-## Deploy to Vercel
+- **Pattern Recognition**: Claude AI analyzes scholarships to extract personality profiles and success patterns
+- **Adaptive Scoring**: Different scholarships get different weight profiles based on their priorities
+- **Content Generation**: AI-powered essay drafting with multiple strategic angles
+- **Explainable AI**: Clear explanations for match scores and essay strategies
+- **User Authentication**: Secure login and profile management with Supabase
+- **Modern UI**: Built with Next.js, TypeScript, and shadcn/ui components
 
-Vercel deployment will guide you through creating a Supabase account and project.
+## 📋 Prerequisites
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- Node.js 18+ installed
+- A Supabase account and project ([create one here](https://supabase.com))
+- An Anthropic API key ([get one here](https://console.anthropic.com))
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+## 🛠️ Setup Instructions
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
-
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+### 1. Clone and Install
 
 ## Clone and run locally
 
@@ -67,43 +49,205 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
    pnpm create next-app --example with-supabase with-supabase-app
    ```
 
-3. Use `cd` to change into the app's directory
+```bash
+npm install
+```
+
+### 2. Set Up Supabase Database
+
+1. Go to your [Supabase Dashboard](https://supabase.com/dashboard)
+2. Create a new project or select an existing one
+3. Navigate to the **SQL Editor**
+4. Copy the contents of `supabase/schema.sql` and run it
+5. This will create all necessary tables: `scholarships`, `scholarship_analysis`, `student_profiles`, and `applications`
+
+### 3. Configure Environment Variables
+
+1. Copy `.env.example` to `.env.local`:
 
    ```bash
-   cd with-supabase-app
+   cp .env.example .env.local
    ```
 
-4. Rename `.env.example` to `.env.local` and update the following:
+2. Update `.env.local` with your credentials:
 
-  ```env
-  NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[INSERT SUPABASE PROJECT API PUBLISHABLE OR ANON KEY]
-  ```
-  > [!NOTE]
-  > This example uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, which refers to Supabase's new **publishable** key format.
-  > Both legacy **anon** keys and new **publishable** keys can be used with this variable name during the transition period. Supabase's dashboard may show `NEXT_PUBLIC_SUPABASE_ANON_KEY`; its value can be used in this example.
-  > See the [full announcement](https://github.com/orgs/supabase/discussions/29260) for more information.
+   ```env
+   # Get from Supabase Dashboard > Project Settings > API
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-  Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
-   npm run dev
+   # Get from https://console.anthropic.com/settings/keys
+   ANTHROPIC_API_KEY=your_anthropic_api_key
    ```
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+### 4. Run the Development Server
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+```bash
+npm run dev
+```
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+The app should now be running on [http://localhost:3000](http://localhost:3000)
 
-## Feedback and issues
+## 📁 Project Structure
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+```
+scholarlens/
+├── app/
+│   ├── api/
+│   │   ├── analyze-scholarship/  # Claude AI scholarship analysis
+│   │   ├── match-scholarships/   # Adaptive matching algorithm
+│   │   └── generate-essay/       # AI essay generation
+│   ├── (protected)/              # Authenticated routes
+│   │   ├── home/                 # Dashboard
+│   │   ├── scholarships/         # Browse scholarships
+│   │   └── profile/              # Student profile (to be built)
+│   └── auth/                     # Authentication pages
+├── lib/
+│   ├── ai/
+│   │   ├── claude-client.ts      # Anthropic API wrapper
+│   │   └── prompts.ts            # Prompt templates
+│   ├── supabase/                 # Supabase clients
+│   └── types.ts                  # TypeScript definitions
+├── components/                    # React components
+└── supabase/
+    └── schema.sql                # Database schema
+```
 
-## More Supabase examples
+## 🔑 API Endpoints
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+### POST `/api/analyze-scholarship`
+
+Analyzes a scholarship to extract personality profile, priority weights, and success patterns.
+
+**Request:**
+
+```json
+{
+  "scholarship_id": "uuid"
+}
+```
+
+**Response:**
+
+```json
+{
+  "analysis": {
+    "personality_profile": {...},
+    "priority_weights": {...},
+    "hidden_priorities": [...],
+    "success_patterns": [...],
+    "messaging_strategy": "..."
+  },
+  "cached": true
+}
+```
+
+### POST `/api/match-scholarships`
+
+Calculates match scores between a student and all scholarships.
+
+**Request:**
+
+```json
+{
+  "student_id": "uuid",
+  "limit": 10
+}
+```
+
+**Response:**
+
+```json
+{
+  "matches": [
+    {
+      "scholarship": {...},
+      "match_score": 87.5,
+      "match_breakdown": {...},
+      "match_explanation": "...",
+      "aligned_experiences": [...]
+    }
+  ]
+}
+```
+
+### POST `/api/generate-essay`
+
+Generates tailored essay drafts with different strategic angles.
+
+**Request:**
+
+```json
+{
+  "student_id": "uuid",
+  "scholarship_id": "uuid",
+  "essay_prompt_index": 0
+}
+```
+
+**Response:**
+
+```json
+{
+  "drafts": [
+    {
+      "version": 1,
+      "angle": "Primary Strength Focus",
+      "content": "...",
+      "reasoning": "...",
+      "highlighted_experiences": [...]
+    }
+  ]
+}
+```
+
+## 🎨 Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript, TailwindCSS
+- **UI Components**: shadcn/ui (Radix UI primitives)
+- **Backend**: Next.js API Routes
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **AI**: Claude 3.5 Sonnet (Anthropic)
+- **Deployment**: Vercel (recommended)
+
+## 📊 Database Schema
+
+### Tables
+
+- **scholarships**: Store scholarship data, criteria, and essay prompts
+- **scholarship_analysis**: Cache Claude's analysis results
+- **student_profiles**: Store student information and experiences
+- **applications**: Track generated essays and match scores
+
+See `supabase/schema.sql` for full schema details.
+
+## 🔄 Development Workflow
+
+1. **Add Scholarships**: Manually insert scholarship data into Supabase
+2. **Analyze**: Call `/api/analyze-scholarship` to generate AI analysis
+3. **Create Profile**: Build student profile through the UI
+4. **Match**: Call `/api/match-scholarships` to find best fits
+5. **Generate Essays**: Call `/api/generate-essay` for tailored drafts
+
+## 🚧 Next Steps
+
+- [ ] Build student profile creation UI
+- [ ] Create scholarship browsing interface
+- [ ] Implement essay drafting workflow
+- [ ] Add visualization components (charts, comparisons)
+- [ ] Seed database with 25+ scholarships
+- [ ] Create demo scenarios for presentation
+- [ ] Deploy to Vercel
+
+## 📝 License
+
+MIT License - see LICENSE file for details
+
+## 🤝 Contributing
+
+This is a hackathon project. For questions or collaboration, please open an issue.
+
+---
+
+Built with ❤️ for the Agentiiv Hackathon Challenge
