@@ -1,5 +1,5 @@
 import { Redirect } from "@/components/redirect";
 
 export default function Home() {
-  return <Redirect href="/protected/home"></Redirect>;
+  return <Redirect href="/home"></Redirect>;
 }

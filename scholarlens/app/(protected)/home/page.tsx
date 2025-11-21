@@ -6,7 +6,7 @@ export default function Home() {
       <div className="text-7xl font-bold hover:underline">
         Welcome to ScholarLens
       </div>
-      <Link className="hover:underline text-2xl" href="/protected/scholarships">
+      <Link className="hover:underline text-2xl" href="/scholarships">
         Training Data
       </Link>
     </main>
