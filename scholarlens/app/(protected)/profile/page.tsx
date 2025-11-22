@@ -12,6 +12,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { createClient } from "@/lib/supabase/client";
 
 export default function ProfilePage() {
@@ -96,7 +103,7 @@ export default function ProfilePage() {
 
       const { error } = await supabase
         .from("student_profiles")
-        .upsert(profileData);
+        .upsert(profileData, { onConflict: "user_id" });
 
       if (error) throw error;
 
@@ -197,14 +204,46 @@ export default function ProfilePage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="grade_level">Grade Level</Label>
-                <Input
-                  id="grade_level"
-                  placeholder="e.g., 12th Grade, Freshman"
+                <Select
                   value={formData.grade_level}
-                  onChange={(e) =>
-                    setFormData({ ...formData, grade_level: e.target.value })
+                  onValueChange={(value) =>
+                    setFormData({ ...formData, grade_level: value })
                   }
-                />
+                >
+                  <SelectTrigger id="grade_level">
+                    <SelectValue placeholder="Select your grade level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Below 8th Grade">
+                      Below 8th Grade
+                    </SelectItem>
+                    <SelectItem value="9th Grade">9th Grade</SelectItem>
+                    <SelectItem value="10th Grade">10th Grade</SelectItem>
+                    <SelectItem value="11th Grade">11th Grade</SelectItem>
+                    <SelectItem value="12th Grade">12th Grade</SelectItem>
+                    <SelectItem value="1st Year Post-Secondary">
+                      1st Year Post-Secondary
+                    </SelectItem>
+                    <SelectItem value="2nd Year Post-Secondary">
+                      2nd Year Post-Secondary
+                    </SelectItem>
+                    <SelectItem value="3rd Year Post-Secondary">
+                      3rd Year Post-Secondary
+                    </SelectItem>
+                    <SelectItem value="4th Year Post-Secondary">
+                      4th Year Post-Secondary
+                    </SelectItem>
+                    <SelectItem value="5th Year Post-Secondary">
+                      5th Year Post-Secondary
+                    </SelectItem>
+                    <SelectItem value="Masters Student">
+                      Masters Student
+                    </SelectItem>
+                    <SelectItem value="Doctorate Student">
+                      Doctorate Student
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <Label htmlFor="gpa">GPA</Label>
