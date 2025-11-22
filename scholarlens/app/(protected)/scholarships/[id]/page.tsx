@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import {
   Card,
@@ -129,7 +130,7 @@ export default function ScholarshipDetailPage() {
       }
     } catch (error) {
       console.error("Error analyzing match:", error);
-      alert("Failed to analyze match");
+      toast.error("Failed to analyze match");
     } finally {
       setAnalyzing(false);
     }

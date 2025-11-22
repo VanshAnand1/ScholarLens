@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import {
   Card,
@@ -53,7 +54,7 @@ export default function ApplyPage() {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        alert("Please log in");
+        toast.error("Please log in");
         router.push("/auth/login");
         return;
       }
@@ -65,7 +66,7 @@ export default function ApplyPage() {
         .single();
 
       if (!profile) {
-        alert("Please create your profile first");
+        toast.error("Please create your profile first");
         router.push("/profile");
         return;
       }
@@ -110,7 +111,7 @@ export default function ApplyPage() {
       setEssayPrompt(data.essay_prompt);
     } catch (error: unknown) {
       console.error("Error generating essays:", error);
-      alert(
+      toast.error(
         error instanceof Error
           ? error.message
           : "Failed to generate essays. Please try again."
@@ -267,7 +268,7 @@ export default function ApplyPage() {
                   const draft = drafts.find((d) => d.version === selectedDraft);
                   if (draft) {
                     navigator.clipboard.writeText(draft.content);
-                    alert("Essay copied to clipboard!");
+                    toast.success("Essay copied to clipboard!");
                   }
                 }}
               >
@@ -276,7 +277,7 @@ export default function ApplyPage() {
               <Button
                 disabled={selectedDraft === null}
                 onClick={() => {
-                  alert(
+                  toast.success(
                     "Essay saved! (In a full implementation, this would save to the applications table)"
                   );
                 }}
